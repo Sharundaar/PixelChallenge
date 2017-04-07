@@ -37,13 +37,14 @@ public class CanonController : MonoBehaviour {
 				break;
 		}
 
-		if(canon)
-		{
-			indicationSphere.gameObject.SetActive(true);
-			indicationSphere.position = canon.transform.position + Vector3.up * 5.0f;
+		if (indicationSphere) {
+			if (canon) {
+				indicationSphere.gameObject.SetActive (true);
+				indicationSphere.position = canon.transform.position + Vector3.up * 5.0f;
+			} else
+				indicationSphere.gameObject.SetActive (false);
 		}
-		else
-			indicationSphere.gameObject.SetActive(false);
+		
 
 
 		if (canon && Input.GetButtonDown(inputMap.Activate))

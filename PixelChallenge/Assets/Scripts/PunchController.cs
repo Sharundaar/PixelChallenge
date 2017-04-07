@@ -42,7 +42,7 @@ public class PunchController : MonoBehaviour {
 		{
 			collider = hitColliders [i];
 			if (collider.transform.root == transform) {
-				Debug.Log ("player");
+				// it's me, continue;
 				i++;
 				continue;
 			}
@@ -58,11 +58,11 @@ public class PunchController : MonoBehaviour {
 					
 					ImpulseForce force = controller.gameObject.AddComponent<ImpulseForce> ();
 					force.SetForceAndDuration (direction * 15, 1.5f);
-					Debug.Log ("player FUSROHDAH");
 				}
 				else if(collider.GetComponentInParent<CollectibleObject> ())
 				{
-					rigidBody.AddForce (direction * punchForce, ForceMode.Impulse);
+					if(!collider.GetComponentInParent<CollectibleObject> ().IsInPlayerArea())
+						rigidBody.AddForce (direction * punchForce, ForceMode.Impulse);
 				}
 			}
 			i++;
