@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager current;
+	public GameObject ScoreUI;
 
-	private List<PlayerArea> playerAreas;
+	private List<PlayerData> playersData;
 	private Countdown counter;
 
 	void Awake()
@@ -25,6 +26,22 @@ public class GameManager : MonoBehaviour {
 	{
 		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
 		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
+
+		playersData = new List<PlayerData> ();
+		PlayerData[] playersDatas = FindObjectsOfType(typeof(PlayerData)) as PlayerData[];
+		PlayerArea[] playersAreas = FindObjectsOfType(typeof(PlayerArea)) as PlayerArea[];
+		foreach (PlayerData playerData in playersDatas) {
+			Debug.Log ("playerdata");
+			playersData.Add (playerData);
+
+			foreach (PlayerArea playerArea in playersAreas) {
+				if (playerArea.playerId == playerData.PlayerId) {
+					Debug.Log ("affect");
+					playerData.PlayerArea = playerArea;
+				}
+			}
+		}
+
 		StartGame ();
 	}
 
