@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnArea : MonoBehaviour {
 
 	public List<CollectibleObject> spawnableObjects = new List<CollectibleObject>();
-	public CollectibleObject spawnableObject;
 	private Bounds bounds;
 
 	private Transform objectsContainer;
@@ -25,7 +24,7 @@ public class SpawnArea : MonoBehaviour {
 	void Start () {
 		BoxCollider box = GetComponent<BoxCollider> ();
 		bounds = box.bounds;
-
+		GetComponent<MeshRenderer> ().enabled = false;
 		objectsContainer = new GameObject ("spawnedObjects").transform;
 
 		SpawnObject ();
@@ -35,7 +34,7 @@ public class SpawnArea : MonoBehaviour {
 
 	public Transform SpawnObject()
 	{
-		Transform newObject = Instantiate (spawnableObject.gameObject.transform, SetPositionOnTop(GetRandomPosition ()), Quaternion.identity);
+		Transform newObject = Instantiate ( spawnableObjects[Random.Range(0, spawnableObjects.Count)].gameObject.transform, SetPositionOnTop(GetRandomPosition ()), Quaternion.identity);
 		newObject.parent = objectsContainer;
 		return newObject;
 	}

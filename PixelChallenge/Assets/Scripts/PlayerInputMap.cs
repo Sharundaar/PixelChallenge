@@ -12,6 +12,8 @@ public class PlayerInputMap : MonoBehaviour {
 	{
 		public string Activate;
 		public string Carry;
+		public string Run;
+		public string Punch;
 		public string MoveXAxis;
 		public string MoveYAxis;
 		public string RotateXAxis;
@@ -29,6 +31,16 @@ public class PlayerInputMap : MonoBehaviour {
 	public string Carry
 	{
 		get { return "Xbox360_" + buttons.Carry + "_" + player.PlayerId; }
+	}
+
+	public string Run
+	{
+		get { return "Xbox360_" + buttons.Run + "_" + player.PlayerId; }
+	}
+
+	public string Punch
+	{
+		get { return "Xbox360_" + buttons.Punch + "_" + player.PlayerId; }
 	}
 
 	public string MoveXAxis

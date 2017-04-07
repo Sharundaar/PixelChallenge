@@ -89,6 +89,8 @@ public class CarryController : MonoBehaviour {
 
 	void Carry(Transform obj)
 	{
+		/*while( obj.parent != null )
+			obj = obj.parent;*/
 		carryPivot.forward = Vector3.ProjectOnPlane((obj.position - transform.position), Vector3.up).normalized;
 
 		// obj.GetComponent<SnapToFloor>().enabled = false;
