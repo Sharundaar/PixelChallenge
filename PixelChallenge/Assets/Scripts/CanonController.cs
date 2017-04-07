@@ -76,4 +76,9 @@ public class CanonController : MonoBehaviour {
 		canon.Hazimut += -yaxis;
 		canon.power += xaxis;
 	}
+
+	public bool isUsingCanon()
+	{
+		return canon != null;
+	}
 }
