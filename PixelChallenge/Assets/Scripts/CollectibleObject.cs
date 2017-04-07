@@ -14,7 +14,7 @@ public class CollectibleObject : MonoBehaviour {
 
 
 	void Start () {
-		currentLifeTime = lifeTime;
+		ResetTimer ();
 	}
 
 	void Update () {
@@ -40,6 +40,7 @@ public class CollectibleObject : MonoBehaviour {
 	public void SetIsInPlayerArea(bool isInArea)
 	{
 		isInPlayerArea = isInArea;
+		ResetTimer ();
 	}
 
 	public void TakeObject()
@@ -50,6 +51,11 @@ public class CollectibleObject : MonoBehaviour {
 	public void ReleaseObject()
 	{
 		isTaken = false;
+		ResetTimer();
+	}
+
+	private void ResetTimer()
+	{
 		currentLifeTime = lifeTime;
 	}
 

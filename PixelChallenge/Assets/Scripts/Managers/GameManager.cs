@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager current;
 
-	List<PlayerArea> playerAreas;
+	private List<PlayerArea> playerAreas;
+	private Countdown counter;
 
 	void Awake()
 	{
@@ -22,27 +23,26 @@ public class GameManager : MonoBehaviour {
 		
 	void InitGame()
 	{
-		
+		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
+		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
 		StartGame ();
 	}
 
 	public void StartGame () {
-		var counter = GetComponent<Countdown> ();
+		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
 	}
 
+	private void OnTick () {
+		Debug.Log("Current time : "+counter.GetTime());
+	}
+
 	public void CounterEnded () {
+		EventManager.StopListening (Countdown.COUNTER_ENDED, CounterEnded);
 		CountPoints ();
 	}
 
 	public void CountPoints () {
 		
-		
-	}
-
-	private void GetObjectsFromZone (GameObject zone) {
-		List<CollectibleObject> objects = new List<CollectibleObject>();
-
-
 	}
 }
