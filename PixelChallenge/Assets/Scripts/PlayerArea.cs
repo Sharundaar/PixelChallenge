@@ -24,6 +24,7 @@ public class PlayerArea : MonoBehaviour {
 		var collectible = collider.GetComponent<CollectibleObject> ();
 		if (collectible) {
 			Debug.Log ("ENTER");
+			collectible.SetIsInPlayerArea (true);
 			objects.Add ( collectible );
 			currentScore += collectible.points;
 		}
@@ -40,9 +41,19 @@ public class PlayerArea : MonoBehaviour {
 		var collectible = collider.GetComponent<CollectibleObject> ();
 		if (collectible) {
 			Debug.Log ("QUIT");
+			collectible.SetIsInPlayerArea (false);
 			objects.Remove (collectible);
 			currentScore -= collectible.points;
 		}
+	}
+
+	public int RecalculatePoints()
+	{
+		currentScore = 0;
+		foreach (CollectibleObject collectible in objects) {
+			currentScore += collectible.points;
+		}
+		return currentScore;
 	}
 
 	public List<CollectibleObject> GetObjects()
