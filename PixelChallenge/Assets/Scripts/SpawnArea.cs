@@ -21,6 +21,7 @@ public class SpawnArea : MonoBehaviour {
 	public Transform SpawnObject()
 	{
 		Transform newObject = Instantiate (spawnableObject.gameObject.transform, GetRandomPosition (), Quaternion.identity);
+		newObject.parent = gameObject.transform;
 		return newObject;
 	}
 

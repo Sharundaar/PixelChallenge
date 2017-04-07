@@ -6,7 +6,7 @@ public class CollectibleObject : MonoBehaviour {
 
 	public int points = 1;
 
-	public float lifeTime = 10;
+	public float lifeTime = 100;
 	private float currentLifeTime = 0;
 
 	private bool isTaken = false;
