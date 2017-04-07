@@ -26,8 +26,7 @@ public class PlayerData : MonoBehaviour {
 	public PlayerArea PlayerArea
 	{
 		set { 
-			playerArea = value; 
-			Debug.Log (playerArea);
+			playerArea = value;
 		}
 	}
 }

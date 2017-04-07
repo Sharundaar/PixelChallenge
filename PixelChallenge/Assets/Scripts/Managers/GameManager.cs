@@ -32,12 +32,10 @@ public class GameManager : MonoBehaviour {
 		PlayerData[] playersDatas = FindObjectsOfType(typeof(PlayerData)) as PlayerData[];
 		PlayerArea[] playersAreas = FindObjectsOfType(typeof(PlayerArea)) as PlayerArea[];
 		foreach (PlayerData playerData in playersDatas) {
-			Debug.Log ("playerdata");
 			playersData.Add (playerData);
 
 			foreach (PlayerArea playerArea in playersAreas) {
 				if (playerArea.playerId == playerData.PlayerId) {
-					Debug.Log ("affect");
 					playerData.PlayerArea = playerArea;
 				}
 			}
