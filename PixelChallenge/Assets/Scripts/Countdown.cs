@@ -9,7 +9,6 @@ public class Countdown : MonoBehaviour {
 	public float durationInSeconds = 5 * 60;
 	private float currentTime = 0;
 	private bool isRunning = false;
-	public Text UITextToUpdate;
 
 
 	public void StartCounter () {

@@ -21,6 +21,9 @@ public class CarryController : MonoBehaviour {
 	Transform carryPivot = null;
 	Transform carryPoint; // carry pivot first point
 
+	[SerializeField]
+	private float throwForce = 2.0f;
+
 	void Start()
 	{
 		inputMap = GetComponent<PlayerInputMap>();
@@ -45,6 +48,7 @@ public class CarryController : MonoBehaviour {
 
 		if (carriedObject)
 		{
+			indicationSphere.position = carriedObject.transform.position + Vector3.up * 5.0f;
 			if (Input.GetButtonDown(inputMap.Carry))
 				LetGo();
 			return;
@@ -76,15 +80,15 @@ public class CarryController : MonoBehaviour {
 		indicationSphere.position = closest.position + Vector3.up * 5.0f;
 		indicationSphere.gameObject.SetActive(true);
 
-		// Gizmos.DrawSphere(closest.transform.position + closest.transform.up * 5.0f, 2.0f);
-
 		if( Input.GetButtonDown(inputMap.Carry) )
 			Carry(closest);
 	}
 
 	void Carry(Transform obj)
 	{
-		obj.GetComponent<SnapToFloor>().enabled = false;
+		carryPivot.forward = Vector3.ProjectOnPlane((obj.position - transform.position), Vector3.up).normalized;
+
+		// obj.GetComponent<SnapToFloor>().enabled = false;
 		var carried = obj.gameObject.AddComponent<CarriedObject>();
 		carried.carryPoint = carryPoint;
 
@@ -93,8 +97,13 @@ public class CarryController : MonoBehaviour {
 
 	void LetGo()
 	{
-		carriedObject.GetComponent<SnapToFloor>().enabled = true;
+		// carriedObject.GetComponent<SnapToFloor>().enabled = true;
+		var carriedTransform = carriedObject.transform;
 		Destroy(carriedObject);
 		carriedObject = null;
+
+		RaycastHit hit;
+		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 5.0f, LayerMask.NameToLayer("Floor")))
+			carriedTransform.position = hit.point - hit.normal * 0.5f;
 	}
 }

@@ -5,10 +5,29 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour {
 
 	[SerializeField]
-	private string playerId = "1";
+	private int playerId = 1;
 
-	public string PlayerId
+	private PlayerArea playerArea;
+
+	public int PlayerId
 	{
 		get { return playerId; }
+	}
+
+	public int Score
+	{
+		get { 
+			if (playerArea)
+				return playerArea.currentScore;
+			return 0; 
+		}
+	}
+
+	public PlayerArea PlayerArea
+	{
+		set { 
+			playerArea = value; 
+			Debug.Log (playerArea);
+		}
 	}
 }
