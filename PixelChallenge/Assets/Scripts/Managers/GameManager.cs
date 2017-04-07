@@ -48,18 +48,27 @@ public class GameManager : MonoBehaviour {
 		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
 		ScoreUI.SetActive (true);
+
+		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
+		foreach (SpawnArea spawnArea in spawnsAreas) {
+			spawnArea.StartSpawning ();
+		}
 	}
 
 	private void OnTick () {
-		Debug.Log("Current time : "+counter.GetTimeInStr());
+		//Debug.Log("Current time : "+counter.GetTimeInStr());
 	}
 
-	public void CounterEnded () {
+	private void CounterEnded () {
 		EventManager.StopListening (Countdown.COUNTER_ENDED, CounterEnded);
-		CountPoints ();
+		EndGame ();
 	}
 
-	public void CountPoints () {
+	public void EndGame () {
+		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
+		foreach (SpawnArea spawnArea in spawnsAreas) {
+			spawnArea.StopSpawning ();
+		}
 		
 	}
 }
