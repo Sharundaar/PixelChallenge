@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 		
 	void InitGame()
 	{
+		ScoreUI.SetActive (false);
 		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
 		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour {
 	public void StartGame () {
 		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
+		ScoreUI.SetActive (true);
 	}
 
 	private void OnTick () {
