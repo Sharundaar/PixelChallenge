@@ -13,6 +13,9 @@ public class CarryController : MonoBehaviour {
 	[SerializeField]
 	LayerMask carryLayer = 0;
 
+	[SerializeField]
+	LayerMask placeLayer = 0;
+
 	private CarriedObject carriedObject = null;
 
 	private PlayerInputMap inputMap;
@@ -103,7 +106,7 @@ public class CarryController : MonoBehaviour {
 		carriedObject = null;
 
 		RaycastHit hit;
-		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 5.0f, LayerMask.NameToLayer("Floor")))
-			carriedTransform.position = hit.point - hit.normal * 0.5f;
+		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 200.0f + 5.0f, placeLayer))
+			carriedTransform.position = hit.point;
 	}
 }
