@@ -10,6 +10,14 @@ public class GameManager : MonoBehaviour {
 	private List<PlayerData> playersData;
 	private Countdown counter;
 
+	public List<PlayerData> PlayersData
+	{
+		get
+		{
+			return playersData;
+		}
+	}
+
 	void Awake()
 	{
 		if (current == null)
