@@ -36,6 +36,13 @@ public class Countdown : MonoBehaviour {
 		return currentTime;
 	}
 
+	public string GetTimeInStr()
+	{
+		System.TimeSpan t = System.TimeSpan.FromSeconds (currentTime);
+
+		return string.Format("{0:#00}:{1:00}", t.Minutes, t.Seconds);
+	}
+
 
 	void Update () {
 		if (!isRunning)

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void OnTick () {
-		Debug.Log("Current time : "+counter.GetTime());
+		Debug.Log("Current time : "+counter.GetTimeInStr());
 	}
 
 	public void CounterEnded () {
