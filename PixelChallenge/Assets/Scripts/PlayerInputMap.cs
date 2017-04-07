@@ -10,6 +10,7 @@ public class PlayerInputMap : MonoBehaviour {
 	[Serializable]
 	struct Buttons
 	{
+		public string Activate;
 		public string Carry;
 		public string MoveXAxis;
 		public string MoveYAxis;
@@ -19,7 +20,12 @@ public class PlayerInputMap : MonoBehaviour {
 
 	[SerializeField]
 	private Buttons buttons;
-	
+
+	public string Activate
+	{
+		get { return "Xbox360_" + buttons.Activate + "_" + player.PlayerId; }
+	}
+
 	public string Carry
 	{
 		get { return "Xbox360_" + buttons.Carry + "_" + player.PlayerId; }
