@@ -25,8 +25,17 @@ public class PlayerArea : MonoBehaviour {
 		if (collectible) {
 			Debug.Log ("ENTER");
 			collectible.SetIsInPlayerArea (true);
-			objects.Add ( collectible );
+			objects.Add (collectible);
 			currentScore += collectible.points;
+			return;
+		} 
+
+		var playerData = collider.GetComponentInParent<PlayerData> ();
+		if (playerData && playerData.PlayerId != playerId) {
+			Vector3 forceDirection = (collider.transform.position - transform.position);
+			forceDirection.Normalize ();
+			ImpulseForce force = playerData.gameObject.AddComponent<ImpulseForce> ();
+			force.SetForceAndDuration (forceDirection * 10, 0.5f);
 		}
 		
 	}

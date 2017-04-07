@@ -25,7 +25,7 @@ public class SpawnArea : MonoBehaviour {
 	void Start () {
 		BoxCollider box = GetComponent<BoxCollider> ();
 		bounds = box.bounds;
-
+		GetComponent<MeshRenderer> ().enabled = false;
 		objectsContainer = new GameObject ("spawnedObjects").transform;
 
 		SpawnObject ();
