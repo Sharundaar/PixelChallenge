@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 263e318dbe726d64ba1b0810e8116047
-timeCreated: 1491543034
+guid: 16c1e5fdbc540cf4e9babed0f44c1ea4
+timeCreated: 1491589235
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Ground
+    4300000: Loot_Coin002
   materials:
     importMaterials: 1
     materialName: 0
