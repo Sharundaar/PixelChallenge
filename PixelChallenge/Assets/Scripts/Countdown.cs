@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class Countdown : MonoBehaviour {
 	public float durationInSeconds = 5 * 60;
 	private float currentTime = 0;
 	private bool isRunning = false;
+	public Text UITextToUpdate;
 
 
 	public void StartCounter () {
