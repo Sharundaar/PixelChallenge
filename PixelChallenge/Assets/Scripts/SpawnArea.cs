@@ -8,6 +8,8 @@ public class SpawnArea : MonoBehaviour {
 	public CollectibleObject spawnableObject;
 	private Bounds bounds;
 
+	private Transform objectsContainer;
+
 	public float cooldownSpawnMin = 0.5f;
 	public float cooldownSpawnMax = 2.5f;
 	public float maxObjectsInSpawn = 6;
@@ -24,6 +26,8 @@ public class SpawnArea : MonoBehaviour {
 		BoxCollider box = GetComponent<BoxCollider> ();
 		bounds = box.bounds;
 
+		objectsContainer = new GameObject ("spawnedObjects").transform;
+
 		SpawnObject ();
 		SpawnObject ();
 		SpawnObject ();
@@ -32,7 +36,7 @@ public class SpawnArea : MonoBehaviour {
 	public Transform SpawnObject()
 	{
 		Transform newObject = Instantiate (spawnableObject.gameObject.transform, SetPositionOnTop(GetRandomPosition ()), Quaternion.identity);
-		//newObject.parent = gameObject.transform;
+		newObject.parent = objectsContainer;
 		return newObject;
 	}
 
