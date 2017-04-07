@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 		
 	void InitGame()
 	{
+		ScoreUI.SetActive (false);
 		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
 		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
 
@@ -39,12 +40,10 @@ public class GameManager : MonoBehaviour {
 		PlayerData[] playersDatas = FindObjectsOfType(typeof(PlayerData)) as PlayerData[];
 		PlayerArea[] playersAreas = FindObjectsOfType(typeof(PlayerArea)) as PlayerArea[];
 		foreach (PlayerData playerData in playersDatas) {
-			Debug.Log ("playerdata");
 			playersData.Add (playerData);
 
 			foreach (PlayerArea playerArea in playersAreas) {
 				if (playerArea.playerId == playerData.PlayerId) {
-					Debug.Log ("affect");
 					playerData.PlayerArea = playerArea;
 				}
 			}
@@ -56,18 +55,28 @@ public class GameManager : MonoBehaviour {
 	public void StartGame () {
 		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
+		ScoreUI.SetActive (true);
+
+		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
+		foreach (SpawnArea spawnArea in spawnsAreas) {
+			spawnArea.StartSpawning ();
+		}
 	}
 
 	private void OnTick () {
-		Debug.Log("Current time : "+counter.GetTimeInStr());
+		//Debug.Log("Current time : "+counter.GetTimeInStr());
 	}
 
-	public void CounterEnded () {
+	private void CounterEnded () {
 		EventManager.StopListening (Countdown.COUNTER_ENDED, CounterEnded);
-		CountPoints ();
+		EndGame ();
 	}
 
-	public void CountPoints () {
+	public void EndGame () {
+		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
+		foreach (SpawnArea spawnArea in spawnsAreas) {
+			spawnArea.StopSpawning ();
+		}
 		
 	}
 }
