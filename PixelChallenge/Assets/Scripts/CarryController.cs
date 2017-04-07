@@ -98,6 +98,8 @@ public class CarryController : MonoBehaviour {
 		carried.carryPoint = carryPoint;
 
 		carriedObject = carried;
+
+		GetComponent<CanonController>().enabled = false;
 	}
 
 	void LetGo()
@@ -110,5 +112,7 @@ public class CarryController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 200.0f + 5.0f, placeLayer))
 			carriedTransform.position = hit.point;
+
+		GetComponent<CanonController>().enabled = true;
 	}
 }
