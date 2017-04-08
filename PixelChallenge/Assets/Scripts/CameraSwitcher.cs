@@ -20,11 +20,30 @@ public class CameraSwitcher : MonoBehaviour {
 		EventManager.StartListening ("CameraPlayer2", switchToPlayer2);
 
 		EventManager.StartListening ("StartGame", switchToSplitScreen);
+		//StartCoroutine(CameraSwitchTest());
+	}
+
+	IEnumerator CameraSwitchTest()
+	{
+		yield return new WaitForSeconds(1.2f);
+		switchToSplitScreen ();
+		yield return new WaitForSeconds(1.2f);
+		switchToMainCamera ();
+		yield return new WaitForSeconds(1.2f);
+		switchToPlayer1 ();
+		yield return new WaitForSeconds(1.2f);
+		switchToPlayer2 ();
+		yield return new WaitForSeconds(1.2f);
+		switchToSplitScreen ();
+		yield return new WaitForSeconds(1.2f);
+		switchToMainCamera ();
+		yield return null;
 	}
 
 	public void switchToMainCamera () {
 		if (!AreCamerasDefined ())
 			return;
+		Debug.Log ("ChangeMain");
 		mainCamera.SetActive (true);
 		player1.SetActive (false);
 		player2.SetActive (false);
@@ -35,7 +54,7 @@ public class CameraSwitcher : MonoBehaviour {
 	public void switchToSplitScreen () {
 		if (!AreCamerasDefined ())
 			return;
-		Debug.Log ("Change");
+		Debug.Log ("Changesplit");
 		mainCamera.SetActive (false);
 		player1.SetActive (false);
 		player2.SetActive (false);
@@ -46,6 +65,7 @@ public class CameraSwitcher : MonoBehaviour {
 	public void switchToPlayer1 () {
 		if (!AreCamerasDefined ())
 			return;
+		Debug.Log ("Change1");
 		mainCamera.SetActive (false);
 		player1.SetActive (true);
 		player2.SetActive (false);
@@ -56,6 +76,7 @@ public class CameraSwitcher : MonoBehaviour {
 	public void switchToPlayer2 () {
 		if (!AreCamerasDefined ())
 			return;
+		Debug.Log ("Change2");
 		mainCamera.SetActive (false);
 		player1.SetActive (false);
 		player2.SetActive (true);
@@ -64,7 +85,7 @@ public class CameraSwitcher : MonoBehaviour {
 	}
 
 	public bool AreCamerasDefined () {
-		return mainCamera != null && player1 != null && player2 != null;
+		return true;//mainCamera != null && player1 != null && player2 != null;
 	}
 
 

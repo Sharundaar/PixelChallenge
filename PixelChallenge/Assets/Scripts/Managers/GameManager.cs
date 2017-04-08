@@ -109,18 +109,18 @@ public class GameManager : MonoBehaviour {
 
 		foreach (SimpleTestController playerController in playersControllers) {
 			playerController.enabled = false;
-			playerController.gameObject.SetActive(false);
+			//playerController.gameObject.SetActive(false);
 		}
 
 		int score1 = playersData1.PlayerArea.RecalculatePoints ();
 		int score2 = playersData2.PlayerArea.RecalculatePoints ();
 
 		if (score1 == score2) {
-			EventManager.StartListening ("MainCamera", StartGame);
+			EventManager.TriggerEvent ("MainCamera");
 		} else if (score1 > score2) {
-			EventManager.StartListening ("CameraPlayer1", StartGame);
+			EventManager.TriggerEvent ("CameraPlayer1");
 		} else {
-			EventManager.StartListening ("CameraPlayer2", StartGame);
+			EventManager.TriggerEvent ("CameraPlayer2");
 		}
 		
 	}
