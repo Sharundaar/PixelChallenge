@@ -8,15 +8,20 @@ ModelImporter:
     100000: Barrel
     100002: //RootNode
     100004: Cannon
+    100006: CannonBody
     400000: Barrel
     400002: //RootNode
     400004: Cannon
+    400006: CannonBody
     2300000: Barrel
     2300002: Cannon
+    2300004: CannonBody
     3300000: Barrel
     3300002: Cannon
+    3300004: CannonBody
     4300000: Cannon
     4300002: Barrel
+    4300004: CannonBody
   materials:
     importMaterials: 1
     materialName: 0

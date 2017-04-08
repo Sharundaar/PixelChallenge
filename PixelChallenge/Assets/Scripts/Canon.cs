@@ -37,6 +37,13 @@ public class Canon : MonoBehaviour {
 		set
 		{
 			var angles = CanonPivot.localEulerAngles;
+
+			float valAbs = Mathf.Abs(value);
+			if (Mathf.Abs(value) < 20)
+				value = Mathf.Sign(value) * 20;
+			else if (Mathf.Abs(value) > 70)
+				value = Mathf.Sign(value) * 70;
+
 			angles.x = value;
 			CanonPivot.localEulerAngles = angles;
 		}
@@ -64,6 +71,29 @@ public class Canon : MonoBehaviour {
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
 		follow.stopFollowOnHit = true;
 
+		canFire = false;
+
 		StartCoroutine(OnCooldown());
+	}
+
+	void Update()
+	{
+		var colliders = Physics.OverlapSphere(transform.position, 5.0f);
+		CarriedObject carried = null;
+		for(int i=0; i<colliders.Length; ++i)
+		{
+			carried = colliders[i].GetComponent<CarriedObject>();
+			if (carried)
+				break;
+		}
+
+		if(carried && carried.GetComponent<CanonAmmunition>())
+		{
+			var control = carried.carryPoint.gameObject.GetComponentInParent<CarryController>();
+			var carriedGo = carried.gameObject;
+			control.LetGo();
+			Destroy(carriedGo);
+			canFire = true;
+		}
 	}
 }
