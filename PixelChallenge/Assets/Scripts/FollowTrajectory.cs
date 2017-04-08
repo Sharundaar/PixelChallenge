@@ -12,7 +12,7 @@ public class FollowTrajectory : MonoBehaviour {
 
 	public float timeMultiplicator = 1.0f;
 
-	public float protectionTime = 1.5f;
+	public float protectionTime = 0.5f;
 
 	private void Start()
 	{
