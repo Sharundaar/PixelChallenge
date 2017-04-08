@@ -25,6 +25,7 @@ public class PlayerData : MonoBehaviour {
 
 	public PlayerArea PlayerArea
 	{
+		get { return playerArea; }
 		set { 
 			playerArea = value;
 		}
