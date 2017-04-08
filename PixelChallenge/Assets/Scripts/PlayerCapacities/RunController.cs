@@ -47,7 +47,7 @@ public class RunController : MonoBehaviour {
 		GetComponent<SimpleTestController> ().ResetSpeedBoost ();
 	}
 
-	private bool CanRun()
+	public bool CanRun()
 	{
 		return !(runDuration >= runMaxDuration);
 	}

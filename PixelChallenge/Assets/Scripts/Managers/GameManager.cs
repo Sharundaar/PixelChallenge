@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager current;
 	public GameObject ScoreUI;
+	public FightCountdown fightCountdown;
 
 	private List<PlayerData> playersData;
+	private SimpleTestController[] playersControllers;
 	private Countdown counter;
 
 	public List<PlayerData> PlayersData
@@ -27,13 +29,17 @@ public class GameManager : MonoBehaviour {
 		
 		DontDestroyOnLoad(gameObject);
 
+
+	}
+
+	void Start()
+	{
 		InitGame();
 	}
 		
 	void InitGame()
 	{
-		if(ScoreUI)
-			ScoreUI.SetActive (false);
+		ScoreUI.SetActive (false);
 		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
 		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
 
@@ -50,10 +56,22 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		StartGame ();
+		playersControllers = FindObjectsOfType(typeof(SimpleTestController)) as SimpleTestController[];
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = false;
+		}
+
+		EventManager.StartListening ("StartGame", StartGame);
+		fightCountdown.StartCountdown ();
 	}
 
 	public void StartGame () {
+		ScoreUI.SetActive (true);
+
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = true;
+		}
+
 		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
 

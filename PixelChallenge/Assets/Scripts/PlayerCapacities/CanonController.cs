@@ -14,6 +14,8 @@ public class CanonController : MonoBehaviour {
 
 	private Canon canon = null;
 
+	private bool useCanon = false;
+
 	// Use this for initialization
 	void Start () {
 		inputMap = GetComponent<PlayerInputMap>();
@@ -23,9 +25,8 @@ public class CanonController : MonoBehaviour {
 	void Update() {
 		Canon canon = null;
 
-		if(this.canon != null)
-		{
-			HandleCanon();
+		if (this.canon != null) {
+			HandleCanon ();
 			return;
 		}
 
@@ -49,6 +50,7 @@ public class CanonController : MonoBehaviour {
 
 		if (canon && Input.GetButtonDown(inputMap.Activate))
 		{
+			useCanon = true;
 			GetComponent<SimpleTestController>().enabled = false;
 			GetComponent<CarryController>().enabled = false;
 			canon.GetComponent<CanonTrajectory>().showPreview = true;
@@ -60,6 +62,8 @@ public class CanonController : MonoBehaviour {
 	{
 		if(Input.GetButtonDown(inputMap.Activate))
 		{
+			// deactivate canon
+			useCanon = false;
 			GetComponent<SimpleTestController>().enabled = true;
 			GetComponent<CarryController>().enabled = true;
 			canon.GetComponent<CanonTrajectory>().showPreview = false;
@@ -80,6 +84,12 @@ public class CanonController : MonoBehaviour {
 	}
 
 	public bool isUsingCanon()
+	{
+		return canon != null && useCanon;
+	}
+
+
+	public bool canUseCanon()
 	{
 		return canon != null;
 	}
