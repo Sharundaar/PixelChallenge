@@ -38,7 +38,7 @@ public class PlayerArea : MonoBehaviour {
 			forceDirection.Normalize ();
 			ImpulseForce force = playerData.gameObject.AddComponent<ImpulseForce> ();
 			force.SetForceAndDuration (forceDirection * 10, 0.5f);
-			AudioManager.instance.PlaySound ("rebond");
+			AudioManager.instance.PlaySound ("AIE");
 		}
 		
 	}
