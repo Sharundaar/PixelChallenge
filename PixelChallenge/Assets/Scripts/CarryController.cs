@@ -89,6 +89,8 @@ public class CarryController : MonoBehaviour {
 
 	void Carry(Transform obj)
 	{
+		/*while( obj.parent != null )
+			obj = obj.parent;*/
 		carryPivot.forward = Vector3.ProjectOnPlane((obj.position - transform.position), Vector3.up).normalized;
 
 		// obj.GetComponent<SnapToFloor>().enabled = false;
@@ -96,6 +98,10 @@ public class CarryController : MonoBehaviour {
 		carried.carryPoint = carryPoint;
 
 		carriedObject = carried;
+
+		CanonController canonController = GetComponent<CanonController> ();
+		if(canonController)
+			canonController.enabled = false;
 	}
 
 	void LetGo()
@@ -108,5 +114,9 @@ public class CarryController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 200.0f + 5.0f, placeLayer))
 			carriedTransform.position = hit.point;
+
+		CanonController canonController = GetComponent<CanonController> ();
+		if(canonController)
+			canonController.enabled = true;
 	}
 }
