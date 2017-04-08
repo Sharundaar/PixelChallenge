@@ -21,7 +21,7 @@ public class CameraSwitcher : MonoBehaviour {
 	}
 
 	private void switchToMainCamera () {
-		if (!areCameraDefined ())
+		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (true);
 		player1.SetActive (false);
@@ -31,7 +31,7 @@ public class CameraSwitcher : MonoBehaviour {
 	}
 		
 	private void switchToSplitScreen () {
-		if (!areCameraDefined ())
+		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (false);
 		player1.SetActive (false);
@@ -41,7 +41,7 @@ public class CameraSwitcher : MonoBehaviour {
 	}
 		
 	private void switchToPlayer1 () {
-		if (!areCameraDefined ())
+		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (false);
 		player1.SetActive (true);
@@ -51,7 +51,7 @@ public class CameraSwitcher : MonoBehaviour {
 	}
 
 	private void switchToPlayer2 () {
-		if (!areCameraDefined ())
+		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (false);
 		player1.SetActive (false);
@@ -60,7 +60,7 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (false);
 	}
 
-	private bool areCameraDefined () {
+	private bool AreCamerasDefined () {
 		return mainCamera != null && player1 != null && player2 != null;
 	}
 
