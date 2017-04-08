@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Canon : MonoBehaviour {
 
 	[SerializeField]
@@ -41,14 +42,28 @@ public class Canon : MonoBehaviour {
 		}
 	}
 
+	[SerializeField]
+	private float cooldown = 2.0f;
+	private bool onCooldown = false;
+
+	IEnumerator OnCooldown()
+	{
+		onCooldown = true;
+		yield return new WaitForSeconds(cooldown);
+		onCooldown = false;
+		yield return null;
+	}
+
 	public void Fire()
 	{
-		if (!canFire)
+		if (! (!onCooldown && canFire))
 			return;
 
 		var bullet = GameObject.Instantiate<Bullet>(bulletPrefab, CanonPivot.position, Quaternion.identity);
 		var follow = bullet.gameObject.AddComponent<FollowTrajectory>();
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
 		follow.stopFollowOnHit = true;
+
+		StartCoroutine(OnCooldown());
 	}
 }
