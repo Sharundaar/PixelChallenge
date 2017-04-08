@@ -7,6 +7,7 @@ public class PlayMusic : MonoBehaviour {
 
 
 	public AudioClip titleMusic;					//Assign Audioclip for title music loop
+	public AudioClip cinematicMusic;						//Assign Audioclip for main 
 	public AudioClip mainMusic;						//Assign Audioclip for main 
 	public AudioMixerSnapshot volumeDown;			//Reference to Audio mixer snapshot in which the master volume of main mixer is turned down
 	public AudioMixerSnapshot volumeUp;				//Reference to Audio mixer snapshot in which the master volume of main mixer is turned up
@@ -35,6 +36,9 @@ public class PlayMusic : MonoBehaviour {
 				break;
 			//If scene index is 1 (usually main scene) assign the clip mainMusic to musicSource
 			case 1:
+				musicSource.clip = cinematicMusic;
+				break;
+			case 2:
 				musicSource.clip = mainMusic;
 				break;
 		}
