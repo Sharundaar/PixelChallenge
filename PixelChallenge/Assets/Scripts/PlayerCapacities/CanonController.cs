@@ -69,8 +69,10 @@ public class CanonController : MonoBehaviour {
 
 	void HandleCanon()
 	{
-		if (Input.GetButtonDown(inputMap.Activate))
-			canon.Fire();
+		if (Input.GetButtonDown (inputMap.Activate)) {
+			canon.Fire ();
+			AudioManager.instance.PlaySound ("canon"+GetComponent<PlayerData> ().PlayerId);
+		}
 
 		bool stop = Input.GetButtonDown(inputMap.Carry);
 		if (stop || !canon.canFire)
