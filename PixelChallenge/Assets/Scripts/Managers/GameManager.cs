@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour {
 	private SimpleTestController[] playersControllers;
 	private Countdown counter;
 
+	private PlayerData playersData1;
+	private PlayerData playersData2;
+
 	public List<PlayerData> PlayersData
 	{
 		get
@@ -48,6 +51,11 @@ public class GameManager : MonoBehaviour {
 		PlayerArea[] playersAreas = FindObjectsOfType(typeof(PlayerArea)) as PlayerArea[];
 		foreach (PlayerData playerData in playersDatas) {
 			playersData.Add (playerData);
+
+			if (playerData.PlayerId == 1)
+				playersData1 = playerData;
+			else if (playerData.PlayerId == 2)
+				playersData2 = playerData;
 
 			foreach (PlayerArea playerArea in playersAreas) {
 				if (playerArea.playerId == playerData.PlayerId) {
@@ -97,6 +105,22 @@ public class GameManager : MonoBehaviour {
 		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
 		foreach (SpawnArea spawnArea in spawnsAreas) {
 			spawnArea.StopSpawning ();
+		}
+
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = false;
+			playerController.gameObject.SetActive(false);
+		}
+
+		int score1 = playersData1.PlayerArea.RecalculatePoints ();
+		int score2 = playersData2.PlayerArea.RecalculatePoints ();
+
+		if (score1 == score2) {
+			
+		} else if (score1 > score2) {
+			
+		} else {
+			
 		}
 		
 	}

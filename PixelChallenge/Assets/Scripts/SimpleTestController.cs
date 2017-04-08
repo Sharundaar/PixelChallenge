@@ -44,6 +44,8 @@ public class SimpleTestController : MonoBehaviour {
 		move = transform.right * xaxis * xspeed * speedBoost - transform.forward * yaxis * yspeed * speedBoost;
 		transform.position += move * Time.deltaTime;
 
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
+
 		if (xaxis != 0 || yaxis != 0)
 			animator.SetBool("Walk", true);
 		else
