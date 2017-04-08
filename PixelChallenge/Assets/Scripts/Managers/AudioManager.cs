@@ -6,7 +6,7 @@ public class Sound
 {
 	public string name;
 	public AudioClip audioClip;
-	public AudioSource audioSource;
+	private AudioSource audioSource;
 	[Range(0f, 1f)]
 	public float volume = 1f;
 	[Range(0f, 2f)]
@@ -24,6 +24,11 @@ public class Sound
 	}
 
 	public void Play(float audioManagerVolume = 1f){
+		if (!audioSource) {
+			Debug.Log ("Wait a bit before playing sound !");
+			return;
+		}
+
 		audioSource.volume = volume*audioManagerVolume + (1*Random.Range(-randomVolume/2f, randomVolume/2f));
 		audioSource.pitch = pitch + (1*Random.Range(-randomPitch/2f, randomPitch/2f));
 		audioSource.Play ();

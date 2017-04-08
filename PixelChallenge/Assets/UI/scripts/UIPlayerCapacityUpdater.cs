@@ -19,8 +19,13 @@ public class UIPlayerCapacityUpdater : MonoBehaviour {
 	RunController runController;
 	CarryController carryController;
 
+	Color alphaColor;
+
 
 	void Start () {
+		alphaColor = new Color(1,1,1);
+		alphaColor.a = 0.2f;
+
 		SimpleTestController[] players = FindObjectsOfType(typeof(SimpleTestController)) as SimpleTestController[];
 		foreach (SimpleTestController player in players) {
 			PlayerData = player.GetComponent<PlayerData> (); 
@@ -77,9 +82,12 @@ public class UIPlayerCapacityUpdater : MonoBehaviour {
 	private void updateImg(GameObject uiObject, bool show)
 	{
 		Image image = uiObject.GetComponent<Image>();
-		if (show)
+		if (show) {
 			image.color = Color.white;
-		else
-			image.color = Color.red;
+		} else {
+
+			image.color = alphaColor;
+		}
+			
 	}
 }
