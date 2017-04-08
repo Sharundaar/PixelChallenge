@@ -87,11 +87,11 @@ public class CanonController : MonoBehaviour {
 			return;
 		}
 
-		float xaxis = Input.GetAxis(inputMap.MoveXAxis);
-		float yaxis = Input.GetAxis(inputMap.MoveYAxis);
+		float xaxis = Input.GetAxis(inputMap.MoveYAxis);
+		float yaxis = Input.GetAxis(inputMap.MoveXAxis);
 
-		canon.Angle += Mathf.Sign(canon.Angle) * xaxis;
-		canon.Hazimut += -yaxis;
+		canon.Angle += xaxis;
+		canon.Hazimut += yaxis;
 	}
 
 	public bool isUsingCanon()
