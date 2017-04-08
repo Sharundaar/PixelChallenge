@@ -29,6 +29,8 @@ public class PunchController : MonoBehaviour {
 	{
 		currentTime = punchResetCooldownDuration;
 
+		GetComponentInChildren<Animator>().SetTrigger("Punch");
+
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5.0f);
 		int i = 0;
 		Collider collider;

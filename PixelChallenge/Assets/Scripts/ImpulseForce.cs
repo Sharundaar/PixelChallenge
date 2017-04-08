@@ -12,6 +12,7 @@ public class ImpulseForce : MonoBehaviour {
 	void Awake () {
 
 		GetComponent<SimpleTestController> ().enabled = false;
+		GetComponentInChildren<Animator>().SetTrigger("Hurt");
 	}
 
 	public void SetForceAndDuration(Vector3 vector, float durationTime)

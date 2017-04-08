@@ -5,6 +5,9 @@ using UnityEngine;
 [SelectionBase]
 public class Canon : MonoBehaviour {
 
+	private Animator animator;
+	private AudioSource audioSource;
+
 	[SerializeField]
 	private Bullet bulletPrefab;
 
@@ -37,6 +40,13 @@ public class Canon : MonoBehaviour {
 		set
 		{
 			var angles = CanonPivot.localEulerAngles;
+
+			float valAbs = Mathf.Abs(value);
+			if (Mathf.Abs(value) < 20)
+				value = Mathf.Sign(value) * 20;
+			else if (Mathf.Abs(value) > 70)
+				value = Mathf.Sign(value) * 70;
+
 			angles.x = value;
 			CanonPivot.localEulerAngles = angles;
 		}
@@ -45,6 +55,12 @@ public class Canon : MonoBehaviour {
 	[SerializeField]
 	private float cooldown = 2.0f;
 	private bool onCooldown = false;
+
+	void Start()
+	{
+		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
+	}
 
 	IEnumerator OnCooldown()
 	{
@@ -63,7 +79,32 @@ public class Canon : MonoBehaviour {
 		var follow = bullet.gameObject.AddComponent<FollowTrajectory>();
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
 		follow.stopFollowOnHit = true;
+		follow.timeMultiplicator = 2.0f;
+
+		canFire = false;
 
 		StartCoroutine(OnCooldown());
+	}
+
+	void Update()
+	{
+		var colliders = Physics.OverlapSphere(transform.position, 5.0f);
+		CarriedObject carried = null;
+		for(int i=0; i<colliders.Length; ++i)
+		{
+			carried = colliders[i].GetComponent<CarriedObject>();
+			if (carried)
+				break;
+		}
+
+		if(carried && carried.GetComponent<CanonAmmunition>())
+		{
+			var control = carried.carryPoint.gameObject.GetComponentInParent<CarryController>();
+			var carriedGo = carried.gameObject;
+			control.LetGo();
+			Destroy(carriedGo);
+			animator.SetTrigger("Load");
+			canFire = true;
+		}
 	}
 }

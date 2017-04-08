@@ -28,6 +28,7 @@ public class RunController : MonoBehaviour {
 	private void Run()
 	{
 		if (isRunning) {
+			GetComponentInChildren<Animator>().SetBool("Run", true);
 			runDuration += Time.deltaTime;
 			if (!CanRun ()) {
 				StopRunning ();
@@ -45,6 +46,7 @@ public class RunController : MonoBehaviour {
 		isRunning = false;
 		runDuration = runResetCooldownDuration;
 		GetComponent<SimpleTestController> ().ResetSpeedBoost ();
+		GetComponentInChildren<Animator>().SetBool("Run", false);
 	}
 
 	public bool CanRun()

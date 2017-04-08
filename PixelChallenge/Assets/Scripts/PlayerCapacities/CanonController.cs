@@ -60,7 +60,10 @@ public class CanonController : MonoBehaviour {
 
 	void HandleCanon()
 	{
-		if(Input.GetButtonDown(inputMap.Activate))
+		if (Input.GetButtonDown(inputMap.Activate))
+			canon.Fire();
+
+		if (Input.GetButtonDown(inputMap.Carry) || !canon.canFire)
 		{
 			// deactivate canon
 			useCanon = false;
@@ -71,16 +74,11 @@ public class CanonController : MonoBehaviour {
 			return;
 		}
 
-		if (Input.GetButtonDown(inputMap.Carry))
-			canon.Fire();
-
 		float xaxis = Input.GetAxis(inputMap.MoveXAxis);
 		float yaxis = Input.GetAxis(inputMap.MoveYAxis);
-		float rotAxis = Input.GetAxis(inputMap.RotateYAxis);
 
-		canon.Angle += rotAxis;
+		canon.Angle += Mathf.Sign(canon.Angle) * xaxis;
 		canon.Hazimut += -yaxis;
-		canon.power += xaxis;
 	}
 
 	public bool isUsingCanon()
