@@ -27,13 +27,7 @@ public class PunchController : MonoBehaviour {
 
 	private void Punch()
 	{
-		Debug.Log ("PUNCH");
 		currentTime = punchResetCooldownDuration;
-		Vector3 moveDirection = playerController.move;
-		moveDirection.Normalize();
-
-		RaycastHit hit;
-		//if (Physics.Raycast (transform.position, moveDirection, out hit, 100.0f)) {
 
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5.0f);
 		int i = 0;
@@ -46,7 +40,6 @@ public class PunchController : MonoBehaviour {
 				i++;
 				continue;
 			}
-			Debug.Log (collider);
 			Rigidbody rigidBody = collider.GetComponentInParent<Rigidbody> ();
 			if (rigidBody) {
 				Vector3 direction = rigidBody.position - transform.position;
@@ -67,6 +60,5 @@ public class PunchController : MonoBehaviour {
 			}
 			i++;
 		}
-
 	}
 }
