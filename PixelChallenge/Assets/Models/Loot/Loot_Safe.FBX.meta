@@ -22,11 +22,13 @@ ModelImporter:
     2300004: Loot_Diamond001
     2300006: Loot_Safe
     2300008: Loots_Low
+    2300010: //RootNode
     3300000: Loot_Coin002
     3300002: Loot_Diamond
     3300004: Loot_Diamond001
     3300006: Loot_Safe
     3300008: Loots_Low
+    3300010: //RootNode
     4300000: Loots_Low
     4300002: Loot_Coin002
     4300004: Loot_Diamond
