@@ -12,6 +12,8 @@ public class FollowTrajectory : MonoBehaviour {
 
 	public float timeMultiplicator = 1.0f;
 
+	public float protectionTime = 1.5f;
+
 	private void Start()
 	{
 		GetComponent<Rigidbody>().isKinematic = true;
@@ -28,11 +30,15 @@ public class FollowTrajectory : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider collider)
 	{
+		if (t < protectionTime)
+			return;
+
 		if (!stopFollowOnHit)
 			return;
 
 		GetComponent<Rigidbody>().isKinematic = false;
 		GetComponent<Collider>().isTrigger = false;
+		GetComponent<Rigidbody>().velocity = trajectory.GetSpeed(t);
 		Destroy(this);
 	}
 	

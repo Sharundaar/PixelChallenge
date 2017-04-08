@@ -11,7 +11,6 @@ public class CanonController : MonoBehaviour {
 	private float activationRange = 2.0f;
 
 	private PlayerInputMap inputMap;
-
 	private Canon canon = null;
 
 	private bool useCanon = false;
@@ -23,23 +22,13 @@ public class CanonController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		Canon canon = null;
-
-		if (this.canon != null) {
+		if (useCanon && this.canon != null) {
 			HandleCanon ();
 			return;
 		}
 
-		var colliders = Physics.OverlapSphere(transform.position, activationRange);
-		for (int i = 0; i < colliders.Length; ++i)
-		{
-			canon = colliders[i].GetComponent<Canon>();
-			if (canon)
-				break;
-		}
-
 		if (indicationSphere) {
-			if (canon) {
+			if (canon && canon.canFire) {
 				indicationSphere.gameObject.SetActive (true);
 				indicationSphere.position = canon.transform.position + Vector3.up * 5.0f;
 			} else
@@ -48,14 +37,34 @@ public class CanonController : MonoBehaviour {
 		
 
 
-		if (canon && Input.GetButtonDown(inputMap.Activate))
+		if (canon && Input.GetButtonDown(inputMap.Activate) && canon.canFire)
 		{
 			useCanon = true;
+
 			GetComponent<SimpleTestController>().enabled = false;
 			GetComponent<CarryController>().enabled = false;
 			canon.GetComponent<CanonTrajectory>().showPreview = true;
 			this.canon = canon;
+			StartCoroutine(MoveCamera());
 		}
+	}
+
+	IEnumerator MoveCamera()
+	{
+		var camera = GetComponentInChildren<Camera>();
+		var preview = canon.GetComponent<CanonTrajectory>().preview;
+		var deltaVec = camera.transform.localPosition;
+		while (canon != null && !Input.GetButtonDown(inputMap.Carry))
+		{ 
+			var targetPos = preview.position + deltaVec;
+			var currentPos = camera.transform.position;
+			var delta = targetPos - currentPos;
+
+			camera.transform.position = camera.transform.position + delta.normalized * Mathf.Min(delta.magnitude, 75.0f);
+			yield return null;
+		}
+
+		camera.transform.localPosition = deltaVec;
 	}
 
 	void HandleCanon()
@@ -63,14 +72,16 @@ public class CanonController : MonoBehaviour {
 		if (Input.GetButtonDown(inputMap.Activate))
 			canon.Fire();
 
-		if (Input.GetButtonDown(inputMap.Carry) || !canon.canFire)
+		bool stop = Input.GetButtonDown(inputMap.Carry);
+		if (stop || !canon.canFire)
 		{
 			// deactivate canon
 			useCanon = false;
 			GetComponent<SimpleTestController>().enabled = true;
 			GetComponent<CarryController>().enabled = true;
 			canon.GetComponent<CanonTrajectory>().showPreview = false;
-			canon = null;
+			if(!stop)
+				canon = null;
 			return;
 		}
 
@@ -91,4 +102,18 @@ public class CanonController : MonoBehaviour {
 	{
 		return canon != null;
 	}
+
+	void OnTriggerEnter(Collider collider)
+	{
+		if(canon == null)
+			canon = collider.GetComponentInParent<Canon>();
+	}
+
+	void OnTriggerExit(Collider collider)
+	{
+		var c = collider.GetComponentInParent<Canon>();
+		if (c == canon)
+			canon = null;
+	}
+
 }

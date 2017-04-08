@@ -11,7 +11,7 @@ public class CanonTrajectory : MonoBehaviour {
 	private LineRenderer lineRenderer;
 
 	[SerializeField]
-	private Transform preview;
+	public Transform preview;
 	public bool showPreview = false;
 
 	public void Start()
@@ -27,8 +27,8 @@ public class CanonTrajectory : MonoBehaviour {
 
 	public void Update()
 	{
-		calculator.pStart = canon.CanonPivot.position;
-		calculator.vStart = -canon.power * canon.CanonPivot.forward;
+		calculator.pStart = canon.BarrelPivot.position;
+		calculator.vStart = -canon.power * canon.BarrelPivot.forward;
 		calculator.g = -9.81f;
 
 		if (!showPreview)
