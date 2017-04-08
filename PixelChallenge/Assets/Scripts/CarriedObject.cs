@@ -14,8 +14,11 @@ public class CarriedObject : MonoBehaviour {
 		Rigidbody body = GetComponent<Rigidbody>();
 		body.isKinematic = true;
 
-		initialPos = transform.GetChild(0).localPosition;
-		transform.GetChild(0).localPosition += Vector3.up * 0.15f;
+		if(transform.childCount > 0)
+		{
+			transform.GetChild(0).localPosition += Vector3.up * 0.15f;
+			initialPos = transform.GetChild(0).localPosition;
+		}
 
 		CollectibleObject collectible = GetComponent<CollectibleObject> ();
 		if(collectible)
@@ -27,7 +30,7 @@ public class CarriedObject : MonoBehaviour {
 		Rigidbody body = GetComponent<Rigidbody>();
 		body.isKinematic = false;
 
-		if(transform.GetChild(0) != null)
+		if(transform.childCount > 0)
 			transform.GetChild(0).localPosition = initialPos;
 
 		CollectibleObject collectible = GetComponent<CollectibleObject> ();

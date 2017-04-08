@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,6 +16,9 @@ public class GameManager : MonoBehaviour {
 
 	private PlayerData playersData1;
 	private PlayerData playersData2;
+
+	[SerializeField]
+	private Text resultText;
 
 	public List<PlayerData> PlayersData
 	{
@@ -115,13 +120,35 @@ public class GameManager : MonoBehaviour {
 		int score1 = playersData1.PlayerArea.RecalculatePoints ();
 		int score2 = playersData2.PlayerArea.RecalculatePoints ();
 
+		ScoreUI.SetActive(false);
+		resultText.gameObject.SetActive(true);
 		if (score1 == score2) {
 			EventManager.TriggerEvent ("MainCamera");
+			resultText.text = "It's a draw !";
+			resultText.color = new Color(246, 254, 0);
 		} else if (score1 > score2) {
 			EventManager.TriggerEvent ("CameraPlayer1");
+			resultText.text = "Congrats player 1 !";
+			resultText.color = new Color(5, 254, 5);
 		} else {
 			EventManager.TriggerEvent ("CameraPlayer2");
+			resultText.text = "Congrats player 2 !";
+			resultText.color = new Color(254, 5, 5);
 		}
+
+		StartCoroutine(ReturnToMenu());
 		
+	}
+
+	IEnumerator ReturnToMenu()
+	{
+		float timer = 0;
+		while(timer < 2.0f || Input.GetButtonDown("Submit"))
+		{
+			timer += Time.deltaTime;
+			yield return null;
+		}
+
+		Application.Quit();
 	}
 }
