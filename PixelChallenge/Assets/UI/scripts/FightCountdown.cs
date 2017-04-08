@@ -26,7 +26,8 @@ public class FightCountdown : MonoBehaviour {
 	}
 
 	IEnumerator StartAnimationCoroutine()
-    {
+	{
+		yield return new WaitForSeconds(1);
 		UI_3.SetActive (true);
 		AudioManager.instance.PlaySound ("UI_3");
         yield return new WaitForSeconds(1);
