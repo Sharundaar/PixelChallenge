@@ -51,6 +51,7 @@ public class CanonController : MonoBehaviour {
 		{
 			GetComponent<SimpleTestController>().enabled = false;
 			GetComponent<CarryController>().enabled = false;
+			canon.GetComponent<CanonTrajectory>().showPreview = true;
 			this.canon = canon;
 		}
 	}
@@ -61,6 +62,7 @@ public class CanonController : MonoBehaviour {
 		{
 			GetComponent<SimpleTestController>().enabled = true;
 			GetComponent<CarryController>().enabled = true;
+			canon.GetComponent<CanonTrajectory>().showPreview = false;
 			canon = null;
 			return;
 		}
