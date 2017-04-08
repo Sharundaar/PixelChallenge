@@ -34,6 +34,8 @@ public class PunchController : MonoBehaviour {
 		GetComponentInChildren<Animator>().SetTrigger("Punch");
 		punchFX.Play(true);
 
+		AudioManager.instance.PlaySound ("punch");
+
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5.0f);
 		int i = 0;
 		Collider collider;

@@ -114,6 +114,7 @@ public class Canon : MonoBehaviour {
 			Destroy(carriedGo);
 			animator.SetTrigger("Load");
 			canFire = true;
+			AudioManager.instance.PlaySound ("reloadCanon");
 		}
 	}
 }
