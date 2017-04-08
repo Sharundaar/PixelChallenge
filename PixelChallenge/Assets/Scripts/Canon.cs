@@ -12,34 +12,39 @@ public class Canon : MonoBehaviour {
 	private Bullet bulletPrefab;
 
 	[SerializeField]
+	public Transform BarrelPivot;
+
+	[SerializeField]
 	public Transform CanonPivot;
 
 	public float power = 0;
 
 	public bool canFire = false;
 
+	float startAngle = 0;
+
 	public float Angle
 	{
 		get
 		{
-			return transform.localEulerAngles.y;
+			return CanonPivot.localEulerAngles.y;
 		}
 		set
 		{
-			var angles = transform.localEulerAngles;
+			var angles = CanonPivot.localEulerAngles;
 			angles.y = value;
-			transform.localEulerAngles = angles;
+			CanonPivot.localEulerAngles = angles;
 		}
 	}
 
 	public float Hazimut {
 		get
 		{
-			return CanonPivot.localEulerAngles.x;
+			return BarrelPivot.localEulerAngles.x;
 		}
 		set
 		{
-			var angles = CanonPivot.localEulerAngles;
+			var angles = BarrelPivot.localEulerAngles;
 
 			float valAbs = Mathf.Abs(value);
 			if (Mathf.Abs(value) < 20)
@@ -48,7 +53,7 @@ public class Canon : MonoBehaviour {
 				value = Mathf.Sign(value) * 70;
 
 			angles.x = value;
-			CanonPivot.localEulerAngles = angles;
+			BarrelPivot.localEulerAngles = angles;
 		}
 	}
 
@@ -60,6 +65,7 @@ public class Canon : MonoBehaviour {
 	{
 		animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
+		startAngle = transform.localEulerAngles.y;
 	}
 
 	IEnumerator OnCooldown()
@@ -75,7 +81,7 @@ public class Canon : MonoBehaviour {
 		if (! (!onCooldown && canFire))
 			return;
 
-		var bullet = GameObject.Instantiate<Bullet>(bulletPrefab, CanonPivot.position, Quaternion.identity);
+		var bullet = GameObject.Instantiate<Bullet>(bulletPrefab, BarrelPivot.position, Quaternion.identity);
 		var follow = bullet.gameObject.AddComponent<FollowTrajectory>();
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
 		follow.stopFollowOnHit = true;

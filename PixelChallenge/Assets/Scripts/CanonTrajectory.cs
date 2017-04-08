@@ -27,8 +27,8 @@ public class CanonTrajectory : MonoBehaviour {
 
 	public void Update()
 	{
-		calculator.pStart = canon.CanonPivot.position;
-		calculator.vStart = -canon.power * canon.CanonPivot.forward;
+		calculator.pStart = canon.BarrelPivot.position;
+		calculator.vStart = -canon.power * canon.BarrelPivot.forward;
 		calculator.g = -9.81f;
 
 		if (!showPreview)
