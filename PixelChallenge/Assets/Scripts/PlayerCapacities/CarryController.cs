@@ -104,9 +104,8 @@ public class CarryController : MonoBehaviour {
 			canonController.enabled = false;
 	}
 
-	void LetGo()
+	public void LetGo()
 	{
-		// carriedObject.GetComponent<SnapToFloor>().enabled = true;
 		var carriedTransform = carriedObject.transform;
 		Destroy(carriedObject);
 		carriedObject = null;
