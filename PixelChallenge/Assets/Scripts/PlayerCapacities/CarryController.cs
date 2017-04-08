@@ -103,6 +103,7 @@ public class CarryController : MonoBehaviour {
 		CanonController canonController = GetComponent<CanonController> ();
 		if(canonController)
 			canonController.enabled = false;
+		AudioManager.instance.PlaySound ("pick");
 	}
 
 	public void LetGo()
@@ -125,5 +126,7 @@ public class CarryController : MonoBehaviour {
 		CanonController canonController = GetComponent<CanonController> ();
 		if(canonController)
 			canonController.enabled = true;
+
+		AudioManager.instance.PlaySound ("throw");
 	}
 }
