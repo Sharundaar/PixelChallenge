@@ -1,0 +1,88 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 950M (ID=0x139a)
+    Vendor:   NVIDIA
+    VRAM:     4065 MB
+    Driver:   21.21.13.7682
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.176 seconds
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\Projects\PixelChallenge\PixelChallenge\Build\Pirates_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.300000 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 569c -> priority: 1 
+  Thread -> id: 2454 -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.716000 ms
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 1526.
+Total: 3.549334 ms (FindLiveObjects: 0.106222 ms CreateObjectMapping: 0.029777 ms MarkObjects: 3.361779 ms  DeleteObjects: 0.050666 ms)
+
+ENTER
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ENTER
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerArea.OnTriggerEnter (UnityEngine.Collider collider) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PunchController.Punch () [0x00000] in <filename unknown>:0 
+  at PunchController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.184889 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1527.
+Total: 0.896000 ms (FindLiveObjects: 0.189333 ms CreateObjectMapping: 0.051555 ms MarkObjects: 0.581333 ms  DeleteObjects: 0.071555 ms)
+
+ENTER
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ENTER
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerArea.OnTriggerEnter (UnityEngine.Collider collider) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.390667 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 1827.
+Total: 21.244453 ms (FindLiveObjects: 0.170222 ms CreateObjectMapping: 0.032000 ms MarkObjects: 0.537333 ms  DeleteObjects: 20.504452 ms)
+
+ChangeMain
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Changesplit
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
