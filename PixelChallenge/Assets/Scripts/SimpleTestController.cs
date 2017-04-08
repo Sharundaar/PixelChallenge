@@ -12,6 +12,7 @@ public class SimpleTestController : MonoBehaviour {
 	float yspeed = 2.0f;
 
 	public float speedBoost = 1;
+	public Vector3 move = Vector3.zero;
 
 	private PlayerInputMap inputMap;
 
@@ -24,7 +25,7 @@ public class SimpleTestController : MonoBehaviour {
 		float xaxis = Input.GetAxis(inputMap.MoveXAxis);
 		float yaxis = Input.GetAxis(inputMap.MoveYAxis);
 
-		Vector3 move = transform.right * xaxis * xspeed * speedBoost - transform.forward * yaxis * yspeed * speedBoost;
+		move = transform.right * xaxis * xspeed * speedBoost - transform.forward * yaxis * yspeed * speedBoost;
 		transform.position += move * Time.deltaTime;
 	}
 
