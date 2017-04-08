@@ -17,7 +17,6 @@ public class UIPlayerScoreUpdater : MonoBehaviour {
 		foreach (PlayerData playerData in playersDatas) {
 			if (playerData.PlayerId == playerId) {
 				PlayerData = playerData;
-				//placeWidget ();
 				break;
 			}
 		}
@@ -33,7 +32,6 @@ public class UIPlayerScoreUpdater : MonoBehaviour {
 
 	/*private void placeWidget()
 	{
-		Debug.Log ("Placed");
 		RectTransform rectTransform = gameObject.transform.GetComponent<RectTransform> ();
 		switch (playerData.PlayerId) {
 			case 1: 
@@ -57,7 +55,6 @@ public class UIPlayerScoreUpdater : MonoBehaviour {
 
 	private void updateUI()
 	{
-		Debug.Log (PlayerData.Score);
 		if(scoreText && PlayerData)
 			scoreText.text = PlayerData.Score + "";
 	}
