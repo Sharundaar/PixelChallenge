@@ -13,14 +13,16 @@ public class CameraSwitcher : MonoBehaviour {
 	public GameObject player2Prefab;
 
 	void Start () {
-
+		switchToMainCamera ();
 		EventManager.StartListening ("MainCamera", switchToMainCamera);
 		EventManager.StartListening ("SplitScreen", switchToSplitScreen);
 		EventManager.StartListening ("CameraPlayer1", switchToPlayer1);
 		EventManager.StartListening ("CameraPlayer2", switchToPlayer2);
+
+		EventManager.StartListening ("StartGame", switchToSplitScreen);
 	}
 
-	private void switchToMainCamera () {
+	public void switchToMainCamera () {
 		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (true);
@@ -30,9 +32,10 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (false);
 	}
 		
-	private void switchToSplitScreen () {
+	public void switchToSplitScreen () {
 		if (!AreCamerasDefined ())
 			return;
+		Debug.Log ("Change");
 		mainCamera.SetActive (false);
 		player1.SetActive (false);
 		player2.SetActive (false);
@@ -40,7 +43,7 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (true);
 	}
 		
-	private void switchToPlayer1 () {
+	public void switchToPlayer1 () {
 		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (false);
@@ -50,7 +53,7 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (false);
 	}
 
-	private void switchToPlayer2 () {
+	public void switchToPlayer2 () {
 		if (!AreCamerasDefined ())
 			return;
 		mainCamera.SetActive (false);
@@ -60,7 +63,7 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (false);
 	}
 
-	private bool AreCamerasDefined () {
+	public bool AreCamerasDefined () {
 		return mainCamera != null && player1 != null && player2 != null;
 	}
 
