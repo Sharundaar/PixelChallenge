@@ -60,7 +60,7 @@ public class CameraSwitcher : MonoBehaviour {
 		player2Prefab.SetActive (false);
 	}
 
-	private void areCameraDefined () {
+	private bool areCameraDefined () {
 		return mainCamera != null && player1 != null && player2 != null;
 	}
 
