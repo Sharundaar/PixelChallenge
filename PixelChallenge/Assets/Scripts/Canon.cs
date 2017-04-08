@@ -51,8 +51,8 @@ public class Canon : MonoBehaviour {
 			float valAbs = Mathf.Abs(value);
 			if (Mathf.Abs(value) < 20)
 				value = Mathf.Sign(value) * 20;
-			else if (Mathf.Abs(value) > 70)
-				value = Mathf.Sign(value) * 70;
+			else if (Mathf.Abs(value) > 45)
+				value = Mathf.Sign(value) * 45;
 
 			angles.x = value;
 			BarrelPivot.localEulerAngles = angles;
