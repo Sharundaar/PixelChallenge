@@ -21,7 +21,7 @@ public class PlayerArea : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider)
 	{
-		var collectible = collider.GetComponent<CollectibleObject> ();
+		var collectible = collider.GetComponentInParent<CollectibleObject> ();
 		if (collectible) {
 			Debug.Log ("ENTER");
 			collectible.SetIsInPlayerArea (true);
@@ -42,14 +42,9 @@ public class PlayerArea : MonoBehaviour {
 		
 	}
 
-	void OnTriggerStay(Collider collider)
-	{
-
-	}
-
 	void OnTriggerExit(Collider collider)
 	{
-		var collectible = collider.GetComponent<CollectibleObject> ();
+		var collectible = collider.GetComponentInParent<CollectibleObject> ();
 		if (collectible) {
 			Debug.Log ("QUIT");
 			collectible.SetIsInPlayerArea (false);
