@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnArea : MonoBehaviour {
 
-	public List<CollectibleObject> spawnableObjects = new List<CollectibleObject>();
+	public List<GameObject> spawnableObjects = new List<GameObject>();
 	private Bounds bounds;
 
 	private Transform objectsContainer;
