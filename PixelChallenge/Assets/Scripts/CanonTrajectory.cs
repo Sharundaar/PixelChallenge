@@ -11,7 +11,7 @@ public class CanonTrajectory : MonoBehaviour {
 	private LineRenderer lineRenderer;
 
 	[SerializeField]
-	private Transform preview;
+	public Transform preview;
 	public bool showPreview = false;
 
 	public void Start()

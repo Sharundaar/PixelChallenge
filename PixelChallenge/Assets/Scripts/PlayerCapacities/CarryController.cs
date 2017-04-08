@@ -50,8 +50,10 @@ public class CarryController : MonoBehaviour {
 
 		if (carriedObject)
 		{
-			Physics.IgnoreCollision(carryPivot.GetComponent<Collider>(), carriedObject.GetComponentInChildren<Collider>());
-
+			var colliders = GetComponentsInChildren<Collider>();
+			var cCol = carriedObject.GetComponentInChildren<Collider>();
+			for(int i=0; i<colliders.Length; ++i)
+				Physics.IgnoreCollision(colliders[i], cCol);
 			indicationSphere.position = carriedObject.transform.position + Vector3.up * 5.0f;
 			if (Input.GetButtonDown(inputMap.Carry))
 				LetGo();
@@ -85,17 +87,14 @@ public class CarryController : MonoBehaviour {
 		indicationSphere.gameObject.SetActive(true);
 
 		if( Input.GetButtonDown(inputMap.Carry) )
-			Carry(closest);
+			Carry(closest.GetComponentInParent<Rigidbody>().transform);
 	}
 
 	void Carry(Transform obj)
 	{
-		/*while( obj.parent != null )
-			obj = obj.parent;*/
 		carryPivot.forward = Vector3.ProjectOnPlane((obj.position - transform.position), Vector3.up).normalized;
 		carryPivot.GetComponent<Collider>().enabled = true;
 
-		// obj.GetComponent<SnapToFloor>().enabled = false;
 		var carried = obj.gameObject.AddComponent<CarriedObject>();
 		carried.carryPoint = carryPoint;
 
@@ -108,6 +107,11 @@ public class CarryController : MonoBehaviour {
 
 	public void LetGo()
 	{
+		var colliders = GetComponentsInChildren<Collider>();
+		var cCol = carriedObject.GetComponentInChildren<Collider>();
+		for (int i = 0; i < colliders.Length; ++i)
+			Physics.IgnoreCollision(colliders[i], cCol, false);
+
 		var carriedTransform = carriedObject.transform;
 		Destroy(carriedObject);
 		carriedObject = null;
