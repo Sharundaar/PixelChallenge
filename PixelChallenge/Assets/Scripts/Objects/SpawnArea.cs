@@ -26,10 +26,6 @@ public class SpawnArea : MonoBehaviour {
 		bounds = box.bounds;
 		GetComponent<MeshRenderer> ().enabled = false;
 		objectsContainer = new GameObject ("spawnedObjects").transform;
-
-		SpawnObject ();
-		SpawnObject ();
-		SpawnObject ();
 	}
 
 	public Transform SpawnObject()

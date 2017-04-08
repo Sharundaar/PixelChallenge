@@ -57,7 +57,8 @@ public class UIPlayerScoreUpdater : MonoBehaviour {
 
 	private void updateUI()
 	{
+		Debug.Log (PlayerData.Score);
 		if(scoreText && PlayerData)
-			scoreText.text = "Player " + PlayerData.PlayerId + " : " + PlayerData.Score;
+			scoreText.text = PlayerData.Score + ""+ Random.Range(0,15);
 	}
 }
