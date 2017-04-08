@@ -46,11 +46,12 @@ public class CarryController : MonoBehaviour {
 	}
 
 	void Update () {
-
 		RotateCarryPivot();
 
 		if (carriedObject)
 		{
+			Physics.IgnoreCollision(carryPivot.GetComponent<Collider>(), carriedObject.GetComponentInChildren<Collider>());
+
 			indicationSphere.position = carriedObject.transform.position + Vector3.up * 5.0f;
 			if (Input.GetButtonDown(inputMap.Carry))
 				LetGo();
@@ -92,6 +93,7 @@ public class CarryController : MonoBehaviour {
 		/*while( obj.parent != null )
 			obj = obj.parent;*/
 		carryPivot.forward = Vector3.ProjectOnPlane((obj.position - transform.position), Vector3.up).normalized;
+		carryPivot.GetComponent<Collider>().enabled = true;
 
 		// obj.GetComponent<SnapToFloor>().enabled = false;
 		var carried = obj.gameObject.AddComponent<CarriedObject>();
@@ -109,6 +111,8 @@ public class CarryController : MonoBehaviour {
 		var carriedTransform = carriedObject.transform;
 		Destroy(carriedObject);
 		carriedObject = null;
+
+		carryPivot.GetComponent<Collider>().enabled = false;
 
 		RaycastHit hit;
 		if (Physics.SphereCast(new Ray(carriedTransform.position + Vector3.up * 200.0f, Vector3.down), 0.5f, out hit, 200.0f + 5.0f, placeLayer))

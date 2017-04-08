@@ -63,4 +63,9 @@ public class PunchController : MonoBehaviour {
 			i++;
 		}
 	}
+
+	public bool CanPunch()
+	{
+		return currentTime <= 0;
+	}
 }

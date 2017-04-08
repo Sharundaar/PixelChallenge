@@ -5,6 +5,9 @@ using UnityEngine;
 [SelectionBase]
 public class Canon : MonoBehaviour {
 
+	private Animator animator;
+	private AudioSource audioSource;
+
 	[SerializeField]
 	private Bullet bulletPrefab;
 
@@ -53,6 +56,12 @@ public class Canon : MonoBehaviour {
 	private float cooldown = 2.0f;
 	private bool onCooldown = false;
 
+	void Start()
+	{
+		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
+	}
+
 	IEnumerator OnCooldown()
 	{
 		onCooldown = true;
@@ -70,6 +79,7 @@ public class Canon : MonoBehaviour {
 		var follow = bullet.gameObject.AddComponent<FollowTrajectory>();
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
 		follow.stopFollowOnHit = true;
+		follow.timeMultiplicator = 2.0f;
 
 		canFire = false;
 
@@ -93,6 +103,7 @@ public class Canon : MonoBehaviour {
 			var carriedGo = carried.gameObject;
 			control.LetGo();
 			Destroy(carriedGo);
+			animator.SetTrigger("Load");
 			canFire = true;
 		}
 	}

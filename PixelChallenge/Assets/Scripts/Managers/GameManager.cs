@@ -6,9 +6,14 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager current;
 	public GameObject ScoreUI;
+	public FightCountdown fightCountdown;
 
 	private List<PlayerData> playersData;
+	private SimpleTestController[] playersControllers;
 	private Countdown counter;
+
+	private PlayerData playersData1;
+	private PlayerData playersData2;
 
 	public List<PlayerData> PlayersData
 	{
@@ -27,13 +32,17 @@ public class GameManager : MonoBehaviour {
 		
 		DontDestroyOnLoad(gameObject);
 
+
+	}
+
+	void Start()
+	{
 		InitGame();
 	}
 		
 	void InitGame()
 	{
-		if(ScoreUI)
-			ScoreUI.SetActive (false);
+		ScoreUI.SetActive (false);
 		EventManager.StartListening (Countdown.COUNTER_ENDED, CounterEnded);
 		EventManager.StartListening (TickOnSeconds.EVENT_TICK, OnTick);
 
@@ -43,6 +52,11 @@ public class GameManager : MonoBehaviour {
 		foreach (PlayerData playerData in playersDatas) {
 			playersData.Add (playerData);
 
+			if (playerData.PlayerId == 1)
+				playersData1 = playerData;
+			else if (playerData.PlayerId == 2)
+				playersData2 = playerData;
+
 			foreach (PlayerArea playerArea in playersAreas) {
 				if (playerArea.playerId == playerData.PlayerId) {
 					playerData.PlayerArea = playerArea;
@@ -50,10 +64,22 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		StartGame ();
+		playersControllers = FindObjectsOfType(typeof(SimpleTestController)) as SimpleTestController[];
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = false;
+		}
+
+		EventManager.StartListening ("StartGame", StartGame);
+		fightCountdown.StartCountdown ();
 	}
 
 	public void StartGame () {
+		ScoreUI.SetActive (true);
+
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = true;
+		}
+
 		counter = GetComponent<Countdown> ();
 		counter.StartCounter ();
 
@@ -79,6 +105,22 @@ public class GameManager : MonoBehaviour {
 		SpawnArea[] spawnsAreas = FindObjectsOfType(typeof(SpawnArea)) as SpawnArea[];
 		foreach (SpawnArea spawnArea in spawnsAreas) {
 			spawnArea.StopSpawning ();
+		}
+
+		foreach (SimpleTestController playerController in playersControllers) {
+			playerController.enabled = false;
+			playerController.gameObject.SetActive(false);
+		}
+
+		int score1 = playersData1.PlayerArea.RecalculatePoints ();
+		int score2 = playersData2.PlayerArea.RecalculatePoints ();
+
+		if (score1 == score2) {
+			
+		} else if (score1 > score2) {
+			
+		} else {
+			
 		}
 		
 	}

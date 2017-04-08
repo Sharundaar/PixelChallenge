@@ -49,7 +49,7 @@ public class RunController : MonoBehaviour {
 		GetComponentInChildren<Animator>().SetBool("Run", false);
 	}
 
-	private bool CanRun()
+	public bool CanRun()
 	{
 		return !(runDuration >= runMaxDuration);
 	}

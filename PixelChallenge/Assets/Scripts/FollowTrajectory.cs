@@ -10,6 +10,8 @@ public class FollowTrajectory : MonoBehaviour {
 
 	public bool stopFollowOnHit = true;
 
+	public float timeMultiplicator = 1.0f;
+
 	private void Start()
 	{
 		GetComponent<Rigidbody>().isKinematic = true;
@@ -21,7 +23,7 @@ public class FollowTrajectory : MonoBehaviour {
 		var pos = trajectory.GetPoint(t);
 		transform.position = pos;
 
-		t += Time.deltaTime;
+		t += Time.deltaTime * timeMultiplicator;
 	}
 
 	private void OnTriggerEnter(Collider collider)
