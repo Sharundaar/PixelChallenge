@@ -18,7 +18,8 @@ public class CarriedObject : MonoBehaviour {
 		transform.GetChild(0).localPosition += Vector3.up * 0.15f;
 
 		CollectibleObject collectible = GetComponent<CollectibleObject> ();
-		collectible.TakeObject ();
+		if(collectible)
+			collectible.TakeObject ();
 	}
 
 	void OnDestroy()
@@ -26,10 +27,12 @@ public class CarriedObject : MonoBehaviour {
 		Rigidbody body = GetComponent<Rigidbody>();
 		body.isKinematic = false;
 
-		transform.GetChild(0).localPosition = initialPos;
+		if(transform.GetChild(0) != null)
+			transform.GetChild(0).localPosition = initialPos;
 
 		CollectibleObject collectible = GetComponent<CollectibleObject> ();
-		collectible.ReleaseObject ();
+		if(collectible)
+			collectible.ReleaseObject ();
 	}
 
 	// Update is called once per frame
