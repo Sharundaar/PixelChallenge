@@ -17,6 +17,8 @@ public class Canon : MonoBehaviour {
 	[SerializeField]
 	public Transform CanonPivot;
 
+	public ParticleSystem shotParticle;
+
 	public float power = 0;
 
 	public bool canFire = false;
@@ -81,6 +83,7 @@ public class Canon : MonoBehaviour {
 		if (! (!onCooldown && canFire))
 			return;
 
+		shotParticle.Play(true);
 		var bullet = GameObject.Instantiate<Bullet>(bulletPrefab, BarrelPivot.position, Quaternion.identity);
 		var follow = bullet.gameObject.AddComponent<FollowTrajectory>();
 		follow.trajectory = GetComponent<CanonTrajectory>().CopyTrajectory();
