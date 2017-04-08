@@ -116,11 +116,11 @@ public class GameManager : MonoBehaviour {
 		int score2 = playersData2.PlayerArea.RecalculatePoints ();
 
 		if (score1 == score2) {
-			
+			EventManager.StartListening ("MainCamera", StartGame);
 		} else if (score1 > score2) {
-			
+			EventManager.StartListening ("CameraPlayer1", StartGame);
 		} else {
-			
+			EventManager.StartListening ("CameraPlayer2", StartGame);
 		}
 		
 	}
