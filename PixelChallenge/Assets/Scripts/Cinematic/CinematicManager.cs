@@ -12,12 +12,7 @@ public class CinematicManager : MonoBehaviour {
 
 	IEnumerator StartAnimationCoroutine()
 	{
-		Debug.Log ("lol");
-		yield return new WaitForSeconds(1);
-		Debug.Log ("lol1");
-		//AudioManager.instance.PlaySound ("UI_FIGHT");
-		yield return new WaitForSeconds(1);
-		Debug.Log ("lol2");
+		yield return new WaitForSeconds(3.2f);
 		SceneManager.LoadScene (2);
 		yield return null;
 	}
