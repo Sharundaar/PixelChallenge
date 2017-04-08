@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpriteDrawOrder : MonoBehaviour {
 
-	PlayerData[] players;
-	Camera cam;
+	PlayerData[] players = null;
+	Camera cam = null;
 
 	bool p1InFrontP2;
 
@@ -13,15 +13,26 @@ public class SpriteDrawOrder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		players = FindObjectsOfType<PlayerData>();
-		cam = FindObjectOfType<Camera>();
-
 		layerIdx1 = SortingLayer.NameToID("Pirate1");
 		layerIdx2 = SortingLayer.NameToID("Pirate2");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(players == null)
+		{
+			players = FindObjectsOfType<PlayerData>();
+			cam = FindObjectOfType<Camera>();
+			return;
+		}
+
+		if (players.Length < 2)
+		{
+			players = FindObjectsOfType<PlayerData>();
+			cam = FindObjectOfType<Camera>();
+			return;
+		}
+
 		float distCamP1 = Vector3.Distance(cam.transform.position, players[0].transform.position);
 		float distCamP2 = Vector3.Distance(cam.transform.position, players[1].transform.position);
 

@@ -27,7 +27,8 @@ public class PlayerArea : MonoBehaviour {
 			collectible.SetIsInPlayerArea (true);
 			objects.Add (collectible);
 			currentScore += collectible.points;
-			AudioManager.instance.PlaySound ("coin"+playerId);
+			if(AudioManager.instance)
+				AudioManager.instance.PlaySound ("coin"+playerId);
 			return;
 		} 
 
