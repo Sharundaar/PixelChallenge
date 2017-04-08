@@ -51,6 +51,8 @@ public class Countdown : MonoBehaviour {
 		
 		currentTime -= Time.deltaTime;
 		if (currentTime <= 0) {
+			currentTime = 0;
+			isRunning = false;
 			CounterEnded ();
 		}
 	}
