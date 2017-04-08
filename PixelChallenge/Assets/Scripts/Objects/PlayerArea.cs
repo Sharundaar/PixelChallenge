@@ -27,7 +27,7 @@ public class PlayerArea : MonoBehaviour {
 			collectible.SetIsInPlayerArea (true);
 			objects.Add (collectible);
 			currentScore += collectible.points;
-			AudioManager.instance.PlaySound ("coin1");
+			AudioManager.instance.PlaySound ("coin"+playerId);
 			return;
 		} 
 
@@ -37,6 +37,7 @@ public class PlayerArea : MonoBehaviour {
 			forceDirection.Normalize ();
 			ImpulseForce force = playerData.gameObject.AddComponent<ImpulseForce> ();
 			force.SetForceAndDuration (forceDirection * 10, 0.5f);
+			AudioManager.instance.PlaySound ("rebond");
 		}
 		
 	}
@@ -54,6 +55,7 @@ public class PlayerArea : MonoBehaviour {
 			collectible.SetIsInPlayerArea (false);
 			objects.Remove (collectible);
 			currentScore -= collectible.points;
+			AudioManager.instance.PlaySound ("coinLoose"+playerId);
 		}
 	}
 
