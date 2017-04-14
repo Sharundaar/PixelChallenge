@@ -143,12 +143,18 @@ public class GameManager : MonoBehaviour {
 	IEnumerator ReturnToMenu()
 	{
 		float timer = 0;
-		while(timer < 2.0f || Input.GetButtonDown("Submit"))
+		while(timer < 5.0f)
 		{
+            if (Input.anyKeyDown)
+                break;
+
 			timer += Time.deltaTime;
 			yield return null;
 		}
 
-		Application.Quit();
+        
+        SceneManager.LoadScene(0);
+        OnlyOneUI.ui.GetComponent<ShowPanels>().ShowMenu();
+        Destroy(gameObject);
 	}
 }

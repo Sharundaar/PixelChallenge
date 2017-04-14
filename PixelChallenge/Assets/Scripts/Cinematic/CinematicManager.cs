@@ -12,8 +12,8 @@ public class CinematicManager : MonoBehaviour {
 
 	IEnumerator StartAnimationCoroutine()
 	{
-		yield return new WaitForSeconds(3.2f);
+        while(!Input.anyKeyDown)
+		    yield return null;
 		SceneManager.LoadScene (2);
-		yield return null;
 	}
 }
